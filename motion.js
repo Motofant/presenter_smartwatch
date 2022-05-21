@@ -5,7 +5,7 @@ var timeout_length = 1000;
 
 // motion detection
 var motion_detect = true;
-var left_arm = true;
+var right_arm = true;
 var x = 0;
 var last;
 
@@ -66,12 +66,12 @@ if (motion_detect) {
       // next slide
       print("swipe -->");
       Start_time = new Date.now();
-      next_slide = left_arm;
+      next_slide = right_arm;
 
       slide_change(next_slide);
     }else if(!block_change && a.y > 0.9 && k < -1 && Math.abs(a.x)<.3 && a.z < 0){
       print("<-- swipe ");
-      next_slide = !left_arm;
+      next_slide = !right_arm;
       Start_time = new Date.now();
       slide_change(next_slide);
     }else if (block_change){

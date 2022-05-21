@@ -4,7 +4,7 @@ var Layout = require("Layout");
 
 // infos:
 var pres_title = "test.pptx";
-var settings = ["10", "undefiend"];
+var settings = ["10", "done"];
 
 var titles= ["F1","F2"];
 var notes = ["N1a\nN1b","N2"];
@@ -34,23 +34,39 @@ var page = new Layout({
 });
 */
 var page = new Layout({
-  type: "v",fillx:1, filly:1,bgCol: g.theme.bg2 ,c:[
-    {type:"h",pad:5,fillx:1,filly:0,c:[
-      {type: "txt", font: "13%", label: "", id: "title",halign: 1,valign:0},
-      {type: "txt", font: "10%", label: "", id: "page",halign: 1,valign:0},
+  type: "v",fillx:1, filly:1, bgCol: g.theme.bg2 ,c:[
+    {type:"h",pad:5, filly:1, valign:-1,c:[
+      {type: "v",fillx:1,  c:[
+          {type: "txt", font: "15%", label: "done", id: "title",halign:-1},
+      ]},
+      {type: "v",fillx:1, c:[
+          {type: "txt", font: "8%", label: "", id: "page",halign:1},
+      ]},
     ], id:"top"},
 
-    {type:"h",pad:5, filly:1, fillx:1, c:[
-      {type: "txt", font: "10%", label: "", id: "notes",halign: -1,valign:-1},
-      {type: "txt", font: "8%", label: "", id: "next_title",halign: -1,valign:0, col:0x7BEF},
+    {type:"h",fillx:1,pad:5,filly:5,valign:-1,c:[
+      {type:"v",fillx:3, valign:-1,c:[
+          {type: "txt", font: "12%", label: "", id: "notes",halign: -1},
+      ]},
+      {type:"v", fillx:1, c:[
+          {type: "txt", font: "8%", label: "", id: "next_title",halign: 1, col:0x7BEF},
+      ]},
     ], id:"middle"},
 
-    {type:"h",pad:5,fillx:1,filly:0, c:[
-      {type: "txt", font: "10%", label: "", id: "page_time",halign:-1,valign:1,},
-      {type: "txt", font: "10%", label: "", id: "gen_time",halign:1,valign:1,},
+    {type:"h",pad:5, filly:1,c:[
+      {type:"v", fillx:1,c:[
+          {type: "txt", font: "10%", label: "", id: "page_time",halign:-1,},
+      ]},
+      {type:"v", fillx:1, c:[  
+          {type: "txt", font: "10%", label: "", id: "gen_time",halign:1},
+      ]},
     ], id:"bottom"},
   ]
 
+});
+
+var fin = new Layout({
+  type:"txt",label:"done",font:"6x8",
 });
 
 var title = new Layout({
@@ -69,7 +85,7 @@ function show_page(titles, note, length, point){
   page.page.label = String(point+1)+"/"+String(length);
 
   page.notes.label = note[point];
-  page.next_title.label = "Next slide:\n"+titles[point+1];
+  page.next_title.label = "Next:\n"+titles[point+1];
   
   page.page_time.label = "2:00";
   //TODO
@@ -96,17 +112,27 @@ function show_start(name, settings){
   title.render();
 }
 
+function show_fin(){
+  g.clear()
+  fin.clear();
+  fin.render();
+}
 
 
-
-Bangle.loadWidgets();
+//Bangle.loadWidgets();
 g.clear(1);
 Bangle.drawWidgets();
-show_page(titles, notes, length,0);
-//show_start(pres_title,settings)
+//show_page(titles, notes, length,0);
+show_start(pres_title,settings)
 var i = 0;
+var start = true;
 Bangle.on('touch', function(zone,location){
-  i++;
-  //show_start(pres_title,settings)
-  show_page(titles, notes, length,i);
+  if (i<length){
+    
+    show_page(titles, notes, length,i);
+    i++;
+  }else{
+    show_fin();
+  }
+
 });
