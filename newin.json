@@ -1,0 +1,28 @@
+{
+	"settings":{
+		"name" : "test.pptx",
+		"pages" : 3,
+		"total_time" : 20,
+		"gesture" : false ,
+		"comments" : false,
+		"page_time" : true
+	},
+
+	"page_info":{
+		"p0":{
+			"titel" : "titel1",
+			"note" : "fakt1\nnfakt2",
+			"time" : 2
+		},
+		"p1" : {
+			"titel" : "titel2",
+			"note": "hallo welt",
+			"time" : false
+		},
+		"p2" : {
+			"titel": "titel3",
+			"note" : "comment ist seeeeeeeeeeeeeeeeehhhhhhhhhhhhhhhhhhr lang",
+			"time" : 5.4
+		}
+	}
+}
