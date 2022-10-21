@@ -1,7 +1,7 @@
 // VARIABLES
 var R = Bangle.appRect;
 var kb = require("ble_hid_keyboard");
-var timeout_length = 1000;
+var timeout_length = 1000; 
 
 // motion detection
 var motion_detect = true;
@@ -97,7 +97,7 @@ if (motion_detect &&false) {
 }
 
 // try with velocity
-if (motion_detect) {
+if (motion_detect && false) {
   // watch on left arm 
   var Start_time = new Date.now();
   var last_timestemp = new Date.now();
@@ -196,6 +196,49 @@ if (motion_detect && false ) {
 // activationmotion followed by swipe
 if(motion_detect && false){
   Bangle.on{
-
   }
+}
+
+// Änderung Ausrichtung der Hand
+if(motion_detect){
+  var Start_time = new Date.now();
+  var last_timestemp = new Date.now();
+  var last_i, last_j,last_k = 0;
+  var block_change = true
+  print("i made a huge mistake")
+
+  Bangle.on('accel', a => {
+    g.reset();
+    var i,j,k;
+    var current_time = new Date.now();
+    if (last){
+      i = (last.x - a.x) * (current_time-last_timestemp);
+      j = (last.y - a.y) * (current_time-last_timestemp);
+      k = (last.z - a.z) * (current_time-last_timestemp);
+      print(a.z);
+      // check for direction
+    if(!block_change && Math.abs(a.x) < .4 && a.y < 0 && Math.abs(a.z) <.7 &&  Math.abs(j) < 5 && k <-5 ){
+      // next slide
+      print("swipe --> Forward");
+      Start_time = new Date.now();
+      next_slide = right_arm;
+      slide_change(next_slide);
+      
+    }else if(!block_change && Math.abs(a.x) < .4  && a.y >0.5 && Math.abs(a.z) <.2 && Math.abs(j) < 5 && k < -3 ){
+      print("<-- swipe  Back");
+      next_slide = !right_arm;
+      Start_time = new Date.now();
+      slide_change(next_slide);
+    }else if (block_change){
+      print("blocked");
+    }
+  }
+    block_change = get_time_diff(Start_time,new Date.now(),timeout_length);
+    last = a;
+    last_timestemp = current_time;
+    last_i = i;
+    last_j = j;
+    last_k = k;
+  });
+
 }

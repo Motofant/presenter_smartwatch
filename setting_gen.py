@@ -1,11 +1,13 @@
 from pptx import Presentation
 import PyPDF2 as pypdf
-import odf
+#import odf
 import os
 import json
-"""
+
 file  = "./Test.pptx"
-file = "./BA.pdf"
+
+#file = "./Verteidigung_presentation.pdf"
+"""
 file = "./test_new.pptm"
 file = "./test.odp"
 """

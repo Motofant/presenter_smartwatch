@@ -137,7 +137,7 @@ function show_fin(){
 if (setting_file){
   // read data and convert to valid input
 
-  var filename = "newin.json";
+  var filename = "newin2.json";
 
   // define file
   var file = require("Storage").readJSON(filename);
@@ -166,7 +166,7 @@ Bangle.drawWidgets();
 //show_page(titles, notes, length,0);
 show_start(settings)
 var i = 0;
-var start = true;
+
 Bangle.on('touch', function(zone,location){
   if (i<settings.pages){
     g.clear(1);
