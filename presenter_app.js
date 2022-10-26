@@ -104,7 +104,7 @@ function get_layout_submit_empty(){
   // creates layout if no presentation is selected 
   return submit_empty = new Layout({
       type:"v", bgCol: g.theme.bg2,fillx:1, filly:1, c:[
-          {type: "txt", font: "13%", label:"No Config Selected" , valign: 0},
+          {type: "txt", font: "13%", label:"No Config\nselected" , valign: 0},
           {type: "txt", font: "13%", label: "Correct?", valign: 0},
           {type: "h",c:[
               {type: "btn",pad:10, font: "15%",label: "NO" ,col:0xF3F0, cb: l => response_submit(false, false), valign: -1},
